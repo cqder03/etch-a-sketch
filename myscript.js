@@ -160,7 +160,7 @@ function returnLowerColorInHex(arr) {
   let r = arr[0];
   let b = arr[1];
   let g = arr[2];
-  console.log(r, g, b);
+
   if (r < 10) {
     r -= r; 
   } else {
@@ -179,8 +179,9 @@ function returnLowerColorInHex(arr) {
     g -= 10;
   }
 
-console.log(r, g ,b);
 let toHex = rgbToHex(r, g, b);
 return toHex;
 
 }
+
+
