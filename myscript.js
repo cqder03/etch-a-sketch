@@ -19,6 +19,10 @@ function createSquares(num) {
 
 const controls = document.querySelector('#controls');
 
+function returnRandom(num) {
+  return Math.floor(Math.random() * num);
+}
+
 // Toggle controls //
 controls.addEventListener('click', (event) => {
   let elementId = event.target.id;
@@ -31,13 +35,29 @@ controls.addEventListener('click', (event) => {
       }
       break;
     case 'toggleEraser':
-        console.log('toggleEraser');
-      break;
+      if (penColor != '#FFFFFF') {
+        penColor = '#FFFFFF';
+        document.querySelector('#toggleEraser').classList.add('active', 'eraserActive');
+      } else {
+        penColor = document.querySelector('#color-picker').value;
+        document.querySelector('#toggleEraser').classList.remove('active', 'eraserActive');
+      }
+    break;
     case 'rainbowMode':
-      console.log('rainbowMode');
+      if (document.querySelector('#rainbowMode').getAttribute('class').includes('active', 'rainbowActive')) {
+        document.querySelector('#rainbowMode').classList.remove('active', 'rainbowActive');
+        penColor = document.querySelector('#color-picker').value;
+      } else {
+        document.querySelector('#rainbowMode').classList.add('active', 'rainbowActive');
+        penColor = `rgb(${returnRandom(255)}, ${returnRandom(255)}, ${returnRandom(255)})`
+      }
       break;
     case 'toggleShading':
-      console.log('toggleShading');;
+      if (document.querySelector('#toggleShading').getAttribute('class').includes('active', 'shadingActive')) {
+        document.querySelector('#toggleShading').classList.remove('active', 'shadingActive');
+      } else {
+        document.querySelector('#toggleShading').classList.add('active', 'shadingActive');
+      }
       break;
     case 'toggleBorder':
     if (squareSelector.getAttribute('style').includes('border-color: black')) {
@@ -72,9 +92,16 @@ controls.addEventListener('change', (event) => {
   }
 })
 
-//Main Pad //
+// Main pad //
 
-mainPad.addEventListener('onmousedown' && 'mouseover', (event) => {
+mainPad.addEventListener('mouseover', (event) => {
   event.target.style.backgroundColor = `${penColor}`;
-  console.log(`Clicked square with id:${event.target.id}`);
+  if (document.querySelector('#rainbowMode').getAttribute('class').includes('active', 'rainbowActive')) {
+    event.target.style.backgroundColor = `rgb(${returnRandom(255)}, ${returnRandom(255)}, ${returnRandom(255)})`;
+  } else if (document.querySelector('#toggleShading').getAttribute('class').includes('active', 'shadingActive')) {
+    let currentColor = event.target.style.backgroundColor;
+    penColor = currentColor - 25;
+    console.log(currentColor);
+
+  }
 });
