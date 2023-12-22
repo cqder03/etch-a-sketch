@@ -38,6 +38,11 @@ controls.addEventListener('click', (event) => {
       if (penColor != '#FFFFFF') {
         penColor = '#FFFFFF';
         document.querySelector('#toggleEraser').classList.add('active', 'eraserActive');
+        if (document.querySelector('#rainbowMode').getAttribute('class').includes('active', 'rainbowActive')) {
+          document.querySelector('#rainbowMode').classList.remove('active', 'rainbowActive');
+        } else if (document.querySelector('#toggleShading').getAttribute('class').includes('active', 'shadingActive')) {
+          document.querySelector('#toggleShading').classList.remove('active', 'shadingActive');
+        }
       } else {
         penColor = document.querySelector('#color-picker').value;
         document.querySelector('#toggleEraser').classList.remove('active', 'eraserActive');
@@ -48,6 +53,11 @@ controls.addEventListener('click', (event) => {
         document.querySelector('#rainbowMode').classList.remove('active', 'rainbowActive');
         penColor = document.querySelector('#color-picker').value;
       } else {
+        if (document.querySelector('#toggleEraser').getAttribute('class').includes('active', 'eraserActive')) {
+          document.querySelector('#toggleEraser').classList.remove('active', 'eraserActive');
+        } else if (document.querySelector('#toggleShading').getAttribute('class').includes('active', 'shadingActive')) {
+          document.querySelector('#toggleShading').classList.remove('active', 'shadingActive');
+        }
         document.querySelector('#rainbowMode').classList.add('active', 'rainbowActive');
         penColor = `rgb(${returnRandom(255)}, ${returnRandom(255)}, ${returnRandom(255)})`
       }
@@ -56,6 +66,11 @@ controls.addEventListener('click', (event) => {
       if (document.querySelector('#toggleShading').getAttribute('class').includes('active', 'shadingActive')) {
         document.querySelector('#toggleShading').classList.remove('active', 'shadingActive');
       } else {
+        if (document.querySelector('#rainbowMode').getAttribute('class').includes('active', 'rainbowActive')) {
+          document.querySelector('#rainbowMode').classList.remove('active', 'rainbowActive');
+        } else if (document.querySelector('#toggleEraser').getAttribute('class').includes('active', 'eraserActive')) {
+          document.querySelector('#toggleEraser').classList.remove('active', 'eraserActive');
+        }
         document.querySelector('#toggleShading').classList.add('active', 'shadingActive');
       }
       break;
